@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>越影公司-登录入口</title>
+		<!-- <link rel="stylesheet" type="text/css" href="themes/default/easyui.css" />
+		<link rel="stylesheet" type="text/css" href="themes/icon.css" />
+		<link rel="stylesheet" type="text/css" href="css/demo.css" /> -->
+	<!-- 	<link rel="stylesheet" href="css/index.css" /> -->
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<!-- <script type="text/javascript" src="js/jquery.easyui.min.js"></script> -->
+		<script type="text/javascript" src="js/jquery.cookie.js"></script>
+		<style>
+			body {
+				margin: 0;
+				padding: 0;
+				background-image: url(img/login.jpg);
+				background-repeat: no-repeat;
+				background-size: 100%;
+			}
+			
+			h2 {
+				margin: 0;
+				padding: 0;
+			}
+			
+			.hint {
+				color: #EEEEEE;
+				font-size: 58px;
+				text-align: center;
+				margin-top: 130px;
+			}
+			
+			.form-control {
+				display: block;
+				width: 240px;
+				height: 24px;
+				padding: 6px 12px;
+				font-size: 14px;
+				color: #555;
+				background-color: #fff;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+				box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+			}
+			
+			.form-control:focus {
+				border-color: #66afe9;
+				outline: 0;
+				-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+				box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6)
+			}
+			
+			.register {
+				width: 360px;
+				border: 0px solid white;
+				background-color: #FFFFFF;
+				margin-left: auto;
+				margin-right: auto;
+				margin-top: 40px;
+				opacity: 1;
+				/* display: flex;
+							justify-content: center;
+							align-items: center; */
+			}
+			
+			.forget>div {
+				float: left;
+			}
+			
+			.forget>div:nth-of-type(2) {
+			
+				font-size: 12px;
+				margin-left: 145px;
+			}
+			
+			.logon {
+				border-top: 1px solid #ccc;
+			}
+			
+			.logon>div {
+				width: 264px;
+				border: 0px solid #66afe9;
+				margin-top: 15px;
+				text-align: center;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			
+			.logon>div:nth-of-type(1) {
+				text-align: left;
+				height: 14px;
+			}
+			
+			.logon>div:nth-of-type(2) {
+				margin-top: 5px
+			}
+			
+			.logon>div:last-of-type {
+				text-align: right;
+				font-size: 12px;
+				margin-top: 20px;
+				padding-bottom: 10px;
+			}
+			
+			a {
+				text-decoration: none;
+			}
+			
+			.biaot {
+			
+				font-size: 30px;
+				position: relative;
+				text-align: center;
+				color: #ccc;
+				padding: 6px 0px;
+			}
+			
+			.left {
+				font-size: 12px;
+				color: red;
+			}
+			
+			#enter {
+				width: 240px;
+				margin-top: 20px;
+				height: 40px;
+				background-color: #CCCCCC;
+				border: none;
+				cursor: pointer;
+				border-radius: 4px;
+			}
+			
+			#enter:hover {
+				background-color: #ddd;
+			}
+			
+			#ck {
+				width: 16px;
+				height: 16px;
+				border: 1px solid #ccc;
+				border-radius: 0px;
+			}
+			
+		</style>
+		<script>
+			$(function(){
+				//记住密码
+				$("#ck").click(function(){
+					if(this.checked){
+						$.cookie("us",$("#us").val(),{expires:7});
+						$.cookie("pwd",$("#pwd").val(),{expires:7});
+					}
+				});
+				$("#us").blur(function(){
+					if($.cookie("us") == $("#us").val()){
+						$("#pwd").val($.cookie("pwd"));
+					}
+				});
+				$("#enter").click(function(){
+					location.href="main.html";
+				});
+			})
+		</script>
+	</head>
+	<body>
+		<div>
+			<div class="hint"><label>Hellow,Welcome back</label></div>
+			<div class="register">
+				<form id="form1">
+					<!-- <div class="biaot"><label >登录</label></div> -->
+					<div class="logon">
+						<div  class="left"><label>你输入的帐号或密码不正确，请重新输入。</label> </div>
+						<div><input type="text" id="us" class="form-control" placeholder="公司账号"/></div>
+						<div><input type="password" id="pwd" class="form-control"  placeholder="公司密码" /></div>
+						<div class="forget"><div><input type="checkbox" id="ck"/><font style="position: relative;top: -4px; font-size: 12px;">记住密码</font></div><div><a href="registerNow.html" target="_blank">注册账号</a></div> </div>
+						<div><input type="button" id="enter" value="登录" /></div>
+						<div><a id="btn" target="_blank" href="forgetpwd.html">忘记密码</a></div>
+					</div>
+				</form>
+			</div>
+		</div>
+		
+	</body>
+</html>

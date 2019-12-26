@@ -1,0 +1,131 @@
+body {
+	margin: 0;
+	padding: 0;
+	background-image: url(../img/login.jpg);
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+h2 {
+	margin: 0;
+	padding: 0;
+}
+
+.hint {
+	color: #EEEEEE;
+	font-size: 58px;
+	text-align: center;
+	margin-top: 130px;
+}
+
+.form-control {
+	display: block;
+	width: 240px;
+	height: 24px;
+	padding: 6px 12px;
+	font-size: 14px;
+	color: #555;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}
+
+.form-control:focus {
+	border-color: #66afe9;
+	outline: 0;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6)
+}
+
+.register {
+	width: 360px;
+	border: 0px solid white;
+	background-color: #FFFFFF;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 40px;
+	opacity: 1;
+	/* display: flex;
+				justify-content: center;
+				align-items: center; */
+}
+
+.forget>div {
+	float: left;
+}
+
+.forget>div:nth-of-type(2) {
+
+	font-size: 12px;
+	margin-left: 145px;
+}
+
+.logon {
+	border-top: 1px solid #ccc;
+}
+
+.logon>div {
+	width: 264px;
+	border: 0px solid #66afe9;
+	margin-top: 15px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.logon>div:nth-of-type(1) {
+	text-align: left;
+	height: 14px;
+}
+
+.logon>div:nth-of-type(2) {
+	margin-top: 5px
+}
+
+.logon>div:last-of-type {
+	text-align: right;
+	font-size: 12px;
+	margin-top: 20px;
+	padding-bottom: 10px;
+}
+
+a {
+	text-decoration: none;
+}
+
+.biaot {
+
+	font-size: 30px;
+	position: relative;
+	text-align: center;
+	color: #ccc;
+	padding: 6px 0px;
+}
+
+.left {
+	font-size: 12px;
+	color: red;
+}
+
+#enter {
+	width: 240px;
+	margin-top: 20px;
+	height: 40px;
+	background-color: #CCCCCC;
+	border: none;
+	cursor: pointer;
+	border-radius: 4px;
+}
+
+#enter:hover {
+	background-color: #ddd;
+}
+
+#ck {
+	width: 16px;
+	height: 16px;
+	border: 1px solid #ccc;
+	border-radius: 0px;
+}

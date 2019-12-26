@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>员工管理系统</title>
+		<link rel="stylesheet" type="text/css" href="themes/default/easyui.css" />
+		<link rel="stylesheet" type="text/css" href="themes/icon.css" />
+		<link rel="stylesheet" type="text/css" href="css/demo.css" />
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+
+		<style>
+			.head{
+				display: flex;
+			}
+			.head>div{
+				
+				color: white;
+				border: 0px solid red;
+			}
+			.head>div:nth-of-type(1) {
+				font-size: 36px;
+				margin-left: 20px;
+				line-height: 80px;
+				
+			}
+			.head>div:nth-of-type(2) {
+				color: white;
+				font-size: 14px;
+				text-align: right;
+				
+				position: absolute;
+				right: 10px;
+			}
+			.head_right div{
+				margin-top: 20px;
+			}
+			/* !-- 侧边栏 -- */
+			#tt {
+				display: none;
+			}
+			
+			#aa ul{
+				margin: 0;
+				padding: 0;
+			}
+			#aa li a {
+				text-decoration: none;
+				color: #000000;
+			}
+			#aa li{
+				background:url(themes/icons/redo.png) no-repeat 0 center;
+				text-indent: 20px;
+				height: 30px;
+				line-height: 30px;
+				list-style-type: none;
+				background-color: #ccc;
+				font-size: 16px;
+				margin: 10px 0;
+				margin-left: 5px;
+				cursor: pointer;
+			}
+			#aa li:hover{
+				background-color: #666;
+			}
+		</style>
+
+		<script>
+			$(function() {
+				/* var pp = $('#aa').accordion('getPanel',2);
+				pp.panel({
+					iconCls:'icon-reload'
+				}); */
+				$("#tt").tabs({
+					fit:true
+				});
+				$("#aa").accordion({
+					fit:true
+				});
+				$("li").click(function() {
+					$(".welcome").css("display","none");
+					$("#tt").css("display","block");
+					if(!$("#tt").tabs("exists",$(this).text())){
+						
+						$('#tt').tabs('add', {
+							title: $(this).text(),
+							closable: true,
+							content:"<table id='table'></table>"
+						});
+						$('#table').datagrid({	
+						    /* url:'datagrid_data.json', */
+						    columns:[[
+								{field:'code',title:'Code',width:100},
+								{field:'name',title:'Name',width:100},
+								{field:'price',title:'Price',width:100,align:'right'}
+						    ]],
+							data:[
+								{code:"1",name:'1',price:'1'},
+								{code:"1",name:'1',price:'1'},
+								{code:"1",name:'1',price:'1'}
+							],
+							rownumbers:true,
+							pagination:true
+							
+						});
+					}
+				})
+				
+				$('#tt').tabs({
+					onClose:function(){
+						if($(this).tabs("tabs").length==0){
+							$(".welcome").css("display","block");
+							$("#tt").css("display","none");
+						}
+					}
+				});
+				$("#exit").click(function(){
+					window.close();
+				});
+			})
+		</script>
+	</head>
+	<body class="easyui-layout">
+		<!-- 标题 -->
+		<div data-options="region:'north',split:true" style="height:100px;background-color: #0092DC;">
+			<div class="head">
+				<div><label>员工管理系统</label></div>
+				<div class="head_right">
+					<div><label>xx,欢迎你00000000000</label></div>
+					<div><a href="#" id="exit">安全退出</a></div>
+				</div>
+			</div>
+		</div>
+		<!-- 侧边栏 -->
+		<div id="left" data-options="region:'west',title:'菜单',split:true" style="width:240px;">
+
+			<div id="aa" class="easyui-accordion" style="width:300px;">
+				
+				<div title="申请管理">
+					<ul>
+						<li><a href="#">人事审批</a></li>
+						<li><a href="#">财务申请</a></li>
+					</ul>
+				</div>
+				<div title="员工管理">
+					<ul>
+						<li><a href="#">员工入职</a></li>
+						<li><a href="#">员工调岗</a></li>
+						<li><a href="#">员工信息管理</a></li>
+					</ul>
+				</div>
+				<div title="财务管理">
+					<ul>
+						<li><a href="#">年度收支报告</a></li>
+						<li><a href="#">公司花费添加</a></li>
+						<li><a href="#">工资发放</a></li>
+						<li><a href="#">工资收入条目添加</a></li>
+					</ul>
+				</div>
+				<div title="考勤管理">
+					<ul>
+						<li><a href="#">查看记录</a></li>
+						
+					</ul>
+				</div>
+				<div title="发送申请">
+					<ul>
+						<li><a href="#">所有申请</a></li>
+						<li><a href="#">公司报销</a></li>
+					</ul>
+				</div>
+				<div title="通讯录">
+					<ul>
+						<li><a href="#">公司通讯录</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 显示内容界面 -->
+		<div id="botton" data-options="region:'center'"style="padding:5px;background:#eee;">
+			<div class="welcome">欢迎使用</div>
+			<!-- Tabs 标签页/选项卡 -->
+			<div id="tt" class="easyui-tabs" style="width:500px;height:250px;">
+
+			</div>
+		</div>
+	</body>
+</html>
