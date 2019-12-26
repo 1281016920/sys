@@ -85,10 +85,12 @@
 						$('#tt').tabs('add', {
 							title: $(this).text(),
 							closable: true,
-							content:"<table id='table'></table>"
+						/* 	content:"<table id='table'></table>", */
+							/* href:"index.html" */
 						});
-						$('#table').datagrid({	
-						    /* url:'datagrid_data.json', */
+						
+						/* $('#table').datagrid({	
+						    url:'datagrid_data.json', 
 						    columns:[[
 								{field:'code',title:'Code',width:100},
 								{field:'name',title:'Name',width:100},
@@ -101,8 +103,7 @@
 							],
 							rownumbers:true,
 							pagination:true
-							
-						});
+						}); */
 					}
 				})
 				
