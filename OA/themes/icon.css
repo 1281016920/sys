@@ -94,3 +94,14 @@
 .icon-large-chart{
 	background:url('icons/large_chart.png') no-repeat center center;
 }
+.icon-application_form_edit {
+	background:url('icons/application_form_edit.png') no-repeat center center;
+}
+
+.icon-user_group {
+	background:url('icons/user_group.png') no-repeat center center;
+}
+
+.icon-money_yen {
+	background:url('icons/money_yen.png') no-repeat center center;
+}

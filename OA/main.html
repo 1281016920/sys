@@ -81,7 +81,6 @@
 					$(".welcome").css("display","none");
 					$("#tt").css("display","block");
 					if(!$("#tt").tabs("exists",$(this).text())){
-						
 						$('#tt').tabs('add', {
 							title: $(this).text(),
 							closable: true,
@@ -137,20 +136,20 @@
 
 			<div id="aa" class="easyui-accordion" style="width:300px;">
 				
-				<div title="申请管理">
+				<div title="申请管理"  data-options="iconCls:'icon-application_form_edit'" >
 					<ul>
 						<li><a href="#">人事审批</a></li>
 						<li><a href="#">财务申请</a></li>
 					</ul>
 				</div>
-				<div title="员工管理">
+				<div title="员工管理" data-options="iconCls:'icon-user_group'">
 					<ul>
 						<li><a href="#">员工入职</a></li>
 						<li><a href="#">员工调岗</a></li>
 						<li><a href="#">员工信息管理</a></li>
 					</ul>
 				</div>
-				<div title="财务管理">
+				<div title="财务管理" data-options = "iconCls:'icon-money_yen'">
 					<ul>
 						<li><a href="#">年度收支报告</a></li>
 						<li><a href="#">公司花费添加</a></li>
