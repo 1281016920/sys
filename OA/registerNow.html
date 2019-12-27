@@ -94,39 +94,73 @@
 				   $('#tb').textbox({
 					    prompt:"请设置用户名"
 				   });
+				   
 				    $('#email').textbox({
 				   		 prompt:"请输入邮箱"
 				   }).textbox("textbox").bind("focus",function(){
 					   		$(".email").text("");
 				   }).bind("blur",function(){
-					   if(/^[0-9a-zA-Z_.-]+[@][0-9a-zA-Z_.-]+([.][a-zA-Z]+){1,2}$/.test($(this).val())){
-					   		$(".email").text("");
+					   email();
+				   });
+					function email() {
+						if(/^[0-9a-zA-Z_.-]+[@][0-9a-zA-Z_.-]+([.][a-zA-Z]+){1,2}$/.test($("#email").val())){
+							return true;
 					   }
 					   else{
-						   
 							$(".email").text("你输入的邮箱长度非法,请确认");
+							return false;
 					   }
-				   });
+					}
 						
 				   $('#pwd1').passwordbox({
 					   prompt: '请设置登录密码',
 					   showEye: true
 				   }).passwordbox("textbox").bind("focus",function(){
-					   		$(".pw1").text("");
-				   }).bind("blur",function(){
-					   if(/^\w{6,18}$/.test($(this).val())){
 					   		$(".pwd1").text("");
+				   }).bind("blur",function(){
+					   pwd1();
+				   });
+				   function pwd1(){
+					   if(/^\w{6,18}$/.test($("#pwd1").textbox('getValue'))){
+							$(".pwd1").text("");
+							return true;
 					   }
 					   else{
 							$(".pwd1").text("密码为6-18位不能包含特殊字符");
+							return false;
 					   }
-				   });;
+				   }
 				   
 				   
 				   $('#pwd2').passwordbox({
 					   prompt: '请确认密码',
 					   showEye: true
-				   })/* .passwordbox('textbox').validatebox({
+				   }).passwordbox("textbox").bind("focus",function(){
+					   		$(".pwd2").text("");
+				   }).bind("blur",function(){
+					   pwd2();
+				   });
+				   function pwd2(){
+					   if($("#pwd1").textbox('getValue')==$("#pwd2").textbox('getValue') && $("#pwd2").textbox('getValue') !=""){
+					   		$(".pwd2").text("");
+							return true;
+					   }
+					   else{
+					   		$(".pwd2").text("请确实密码正确");
+							return false;
+					   }
+				   }
+				   /* 注册*/
+				   $("#register").click(function(){
+					   email();
+					   pwd1();
+						pwd2()
+					   if(pwd2() && email()  && pwd1()){
+						   location.href="index.html";
+					   }
+				   });
+				   
+				   /* .passwordbox('textbox').validatebox({
 					    required: true,
 					    validType:'minLength[5]',
 						missingMessage:"dddd"
