@@ -77,13 +77,17 @@
 				$("#aa").accordion({
 					fit:true
 				});
-				$("li").click(function() {
+				$("#left li").click(function() {
 					$(".welcome").css("display","none");
 					$("#tt").css("display","block");
 					if(!$("#tt").tabs("exists",$(this).text())){
 						$('#tt').tabs('add', {
 							title: $(this).text(),
 							closable: true,
+							
+							onOpen:function(){
+								
+							}
 						/* 	content:"<table id='table'></table>", */
 							/* href:"index.html" */
 						});
@@ -120,7 +124,7 @@
 			})
 		</script>
 	</head>
-	<body class="easyui-layout">
+	<body class="easyui-layout">  
 		<!-- 标题 -->
 		<div data-options="region:'north',split:true" style="height:100px;background-color: #0092DC;">
 			<div class="head">
@@ -142,7 +146,7 @@
 						<li><a href="#">财务申请</a></li>
 					</ul>
 				</div>
-				<div title="员工管理" data-options="iconCls:'icon-user_group'">
+				<div title="员工管理" data-options="iconCls:'icon-status_online'">
 					<ul>
 						<li><a href="#">员工入职</a></li>
 						<li><a href="#">员工调岗</a></li>
@@ -157,19 +161,19 @@
 						<li><a href="#">工资收入条目添加</a></li>
 					</ul>
 				</div>
-				<div title="考勤管理">
+				<div title="考勤管理" data-options = "iconCls:'icon-chart_bar'">
 					<ul>
 						<li><a href="#">查看记录</a></li>
 						
 					</ul>
 				</div>
-				<div title="发送申请">
+				<div title="发送申请" data-options = "iconCls:'icon-arrow_refresh'">
 					<ul>
 						<li><a href="#">所有申请</a></li>
 						<li><a href="#">公司报销</a></li>
 					</ul>
 				</div>
-				<div title="通讯录">
+				<div title="通讯录" data-options ="iconCls:'icon-user_group'">
 					<ul>
 						<li><a href="#">公司通讯录</a></li>
 					</ul>

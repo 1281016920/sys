@@ -105,3 +105,12 @@
 .icon-money_yen {
 	background:url('icons/money_yen.png') no-repeat center center;
 }
+.icon-status_online {
+	background:url('icons/status_online.png') no-repeat center center;
+}
+.icon-arrow_refresh {
+	background:url('icons/arrow_refresh.png') no-repeat center center;
+}
+.icon-chart_bar {
+	background:url('icons/chart_bar.png') no-repeat center center;
+}
