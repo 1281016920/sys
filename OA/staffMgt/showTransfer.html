@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>员工调岗</title>
+		<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css" />
+		<link rel="stylesheet" type="text/css" href="../themes/icon.css" />
+		<link rel="stylesheet" type="text/css" href="../css/demo.css" />
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+		<!--设置分页的中文提示-->
+		<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+	</head>
+	<body>
+		
+		<table id="applyAdjustingPosts" class="easyui-datagrid">
+		    <thead>
+				<tr>
+					<th data-options="field:'emp_code',title:'员工工号',width:100">员工工号</th>
+					<th data-options="field:'apply_date',title:'申请时间',width:160">申请时间</th>
+					<th data-options="field:'apply_remark',title:'申请描述',width:720">申请描述</th>
+					<th data-options="field:'operation',title:'申请操作',width:180">申请操作</th>
+				</tr>
+		    </thead>
+		    <tbody>
+				<tr>
+					<td>012</td>
+					<td>2020-2-22</td>
+					<td>从销售部调到人事部</td>
+					<td>
+						<a href="#" style="text-decoration: none;color:#3399CC;" no="012" onclick="operation(this)">操作</a>&nbsp;|
+						<a href="#" style="text-decoration: none;color:#3399CC;" no="012" onclick="viewannotation(this)">查看批注</a>
+					</td>
+				</tr>
+				<tr>
+					<td>012</td>
+					<td>2020-2-23</td>
+					<td>从人事部调到采购部</td>
+					<td>
+						<a href="#" style="text-decoration: none;color:#3399CC;" no="012" onclick="operation(this)">操作</a>&nbsp;|
+						<a href="#" style="text-decoration: none;color:#3399CC;" no="012" onclick="viewannotation(this)">查看批注</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div id="va" class="easyui-window" title="查看批注" style="width:340px;height:210px" data-options="iconCls:'icon-tip',modal:true,collapsible:false,minimizable:false,maximizable:false,closed:true">
+			<table border="0px" style="margin-top:8px;margin-left:10px;margin-right:10px;">
+				<tr>
+					<td><input class="easyui-textbox" data-options="multiline:true,readonly:true" style="width:300px;height:140px"></td>
+				</tr>
+			</table>
+		</div>
+		<div id="op" class="easyui-window" title="调岗" style="width:460px;height:160px" data-options="iconCls:'icon-user_edit-png',modal:true,collapsible:false,minimizable:false,maximizable:false,closed:true">
+			<table border="0px" style="margin-top:8px;margin-left:10px;margin-right:10px;height: 100px;">
+				<tr>
+					<td>原岗位：</td>
+					<td><input class="easyui-textbox" data-options="" style="width:150px"></td>
+					<td>调至：</td>
+					<td>
+						<select id="cc" class="easyui-combobox" name="dept" style="width:150px;">
+						    <option value="aa">aitem1</option>
+						    <option>bitem2</option>
+						    <option>bitem3</option>
+						    <option>ditem4</option>
+						    <option>eitem5</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" align="center" height="50px">
+						<a id="btn" href="#" class="easyui-linkbutton" data-options="">&nbsp;同&nbsp;&nbsp;意&nbsp;</a>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<a id="btn" href="#" class="easyui-linkbutton" data-options="">&nbsp;驳&nbsp;&nbsp;回&nbsp;</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<script>
+			//设置组合框combobox的下拉框高度为自动高度
+			$.fn.combobox.defaults.panelHeight="auto";
+			//设置组合框combobox的下拉框高度最大为200
+			$.fn.combobox.defaults.panelMaxHeight=200;
+			
+			$(function(){
+				//设置datagrid
+		        $("#applyAdjustingPosts").datagrid({
+		            fit: true,
+		            singleSelect: true,
+		            pagination: true,
+		            striped: true,
+		            pageList: [5, 10, 15], //设置每页记录条数的列表        
+		            pageSize: 10, //初始化页面尺寸（默认分页大小）        
+		            pageNumber: 1 //初始化页面（默认显示第一页） 
+		            //data: { total: , rows:  }
+		        });
+				
+				//分页，注意：分页要放在加载事件中才能刷新
+		        var p = $("#applyAdjustingPosts").datagrid("getPager");
+		        $(p).pagination({
+		            onSelectPage: function (pageNumber, pageSize) {
+		                //$("#applyAdjustingPosts").datagrid("loadData", { total: , rows:  });
+		            }
+		        });
+			});
+			
+			//打开批注窗体
+			function viewannotation(temp){
+				//alert($(temp).attr("no"));
+				$('#va').window('open');
+			}
+			
+			//打开操作窗体
+			function operation(temp){
+				$('#op').window('open');
+			}
+		</script>
+	</body>
+</html>

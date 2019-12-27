@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>公司通讯录</title>
+		<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css" />
+		<link rel="stylesheet" type="text/css" href="../themes/icon.css" />
+		<link rel="stylesheet" type="text/css" href="../css/demo.css" />
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+		<!--设置分页的中文提示-->
+		<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+	</head>
+	<body>
+		<table id="EmpDG" class="easyui-datagrid">
+		    <thead>
+				<tr>
+					<th data-options="field:'emp_code',title:'工号',width:140">工号</th>
+					<th data-options="field:'emp_name',title:'姓名',width:194">姓名</th>
+					<th data-options="field:'emp_gender',title:'性别',width:134">性别</th>
+					<th data-options="field:'emp_birthday',title:'生日',width:214">生日</th>
+					<th data-options="field:'emp_phonenumber',title:'电话',width:214">电话</th>
+					<th data-options="field:'emp_email',title:'邮箱',width:264">邮箱</th>
+				</tr>
+		    </thead>
+		    <tbody>
+				<tr>
+					<td>010</td>
+					<td>张三</td>
+					<td>男</td>
+					<td>1990-1-23</td>
+					<td>11111111111</td>
+					<td>11@163.com</td>
+				</tr>
+				<tr>
+					<td>011</td>
+					<td>李四</td>
+					<td>女</td>
+					<td>1991-4-2</td>
+					<td>22222222222</td>
+					<td>22@163.com</td>
+				</tr>
+			</tbody>
+		</table>
+		<script>
+			//加载事件
+			$(function(){
+				//设置datagrid
+		        $("#EmpDG").datagrid({
+		        	title:'通讯录',
+		        	iconCls:'icon-report-png',
+		            fit: true,
+		            singleSelect: true,
+		            pagination: true,
+		            striped: true,
+		            pageList: [5, 10, 15], //设置每页记录条数的列表        
+		            pageSize: 10, //初始化页面尺寸（默认分页大小）        
+		            pageNumber: 1 //初始化页面（默认显示第一页） 
+		            //data: { total: , rows:  }
+		        });
+				
+				//分页，注意：分页要放在加载事件中才能刷新
+		        var p = $("#EmpDG").datagrid("getPager");
+		        $(p).pagination({
+		            onSelectPage: function (pageNumber, pageSize) {
+		                //$("#EmpDG").datagrid("loadData", { total: , rows:  });
+		            }
+		        });
+			});
+		</script>
+	</body>
+</html>

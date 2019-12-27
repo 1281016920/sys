@@ -94,14 +94,44 @@
 .icon-large-chart{
 	background:url('icons/large_chart.png') no-repeat center center;
 }
-.icon-application_form_edit {
-	background:url('icons/application_form_edit.png') no-repeat center center;
-}
 
-.icon-user_group {
+/*自定义图标*/
+.icon-org-png{
+	background:url('icons/org.png') no-repeat center center;
+}
+.icon-book_edit-png{
+	background:url('icons/book_edit.png') no-repeat center center;
+}
+.icon-user_b-png{
+	background:url('icons/user_b.png') no-repeat center center;
+}
+.icon-chart_bar-png{
+	background:url('icons/chart_bar.png') no-repeat center center;
+}
+.icon-status_online-png{
+	background:url('icons/status_online.png') no-repeat center center;
+}
+.icon-user_group-png{
 	background:url('icons/user_group.png') no-repeat center center;
 }
-
-.icon-money_yen {
+.icon-application_form_edit-png{
+	background:url('icons/application_form_edit.png') no-repeat center center;
+}
+.icon-add1-png{
+	background:url('icons/add1.png') no-repeat center center;
+}
+.icon-user_edit-png{
+	background:url('icons/user_edit.png') no-repeat center center;
+}
+.icon-report-png{
+	background:url('icons/report.png') no-repeat center center;
+}
+.icon-money_yen-png{
 	background:url('icons/money_yen.png') no-repeat center center;
+}
+.icon-css_go-png{
+	background:url('icons/css_go.png') no-repeat center center;
+}
+.icon-page_go-png{
+	background:url('icons/page_go.png') no-repeat center center;
 }

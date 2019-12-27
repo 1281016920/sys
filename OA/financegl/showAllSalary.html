@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>工资发放</title>
+		<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css" />
+		<link rel="stylesheet" type="text/css" href="../themes/icon.css" />
+		<link rel="stylesheet" type="text/css" href="../css/demo.css" />
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+		<!--设置分页的中文提示-->
+		<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+	</head>
+	<body>
+		<table id="PayOffDG" class="easyui-datagrid">
+		    <thead>
+				<tr>
+					<th data-options="field:'emp_code',title:'工号',width:232">工号</th>
+					<th data-options="field:'emp_name',title:'姓名',width:232">姓名</th>
+					<th data-options="field:'is_formal',title:'是否转正',width:232">是否转正</th>
+					<th data-options="field:'emp_salary',title:'应发工资',width:232">应发工资</th>
+					<th data-options="field:'RealWages',title:'实发工资',width:232">实发工资</th>
+				</tr>
+		    </thead>
+		    <tbody>
+				<tr>
+					<td>010</td>
+					<td>张三</td>
+					<td>是</td>
+					<td>5000</td>
+					<td>5000</td>
+				</tr>
+				<tr>
+					<td>011</td>
+					<td>李四</td>
+					<td>是</td>
+					<td>4000</td>
+					<td>4000</td>
+				</tr>
+			</tbody>
+		</table>
+		<script>
+			//加载事件
+			$(function(){
+				//设置datagrid
+		        $("#PayOffDG").datagrid({
+		        	title:'发放工资',
+		        	iconCls:'icon-css_go-png',
+		        	//工具栏，用于发送工资
+		        	tools:[{
+						iconCls:'icon-page_go-png',
+						handler:function(){
+							alert('发工资');
+						}
+					}],
+		            fit: true,
+		            singleSelect: true,
+		            pagination: true,
+		            striped: true,
+		            pageList: [5, 10, 15], //设置每页记录条数的列表        
+		            pageSize: 10, //初始化页面尺寸（默认分页大小）        
+		            pageNumber: 1 //初始化页面（默认显示第一页） 
+		            //data: { total: , rows:  }
+		        });
+				
+				//分页，注意：分页要放在加载事件中才能刷新
+		        var p = $("#PayOffDG").datagrid("getPager");
+		        $(p).pagination({
+		            onSelectPage: function (pageNumber, pageSize) {
+		                //$("#PayOffDG").datagrid("loadData", { total: , rows:  });
+		            }
+		        });
+			});
+		</script>
+	</body>
+</html>

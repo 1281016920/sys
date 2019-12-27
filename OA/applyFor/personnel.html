@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>人事申请</title>
+		<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css" />
+		<link rel="stylesheet" type="text/css" href="../themes/icon.css" />
+		<link rel="stylesheet" type="text/css" href="../css/demo.css" />
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+		<!--设置分页的中文提示-->
+		<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+		
+		
+	</head>
+	<body>
+		<!--人事申请表-->
+		<table id="applyDG" class="easyui-datagrid">
+		    <thead>
+				<tr>
+					<th data-options="field:'apply_id',title:'申请编号',width:100">申请编号</th>
+					<th data-options="field:'apply_date',title:'申请时间',width:160">申请时间</th>
+					<th data-options="field:'apply_type',title:'申请类型',width:100">申请类型</th>
+					<th data-options="field:'apply_remark',title:'申请描述',width:620">申请描述</th>
+					<th data-options="field:'operation',title:'申请操作',width:180">申请操作</th>
+				</tr>
+		    </thead>
+		    <tbody>
+				<tr>
+					<td>1</td>
+					<td>2020-02-03</td>
+					<td>请假申请</td>
+					<td>由于不小心遗失身份证，需要请假重新办理身份证</td>
+					<td>
+						<a href="#" style="text-decoration: none;color:#3399CC;" no="002">通过</a>&nbsp;|
+						<a href="#" style="text-decoration: none;color:#3399CC;" no="002" onclick="annotation(this);">作废</a>&nbsp;|
+						<a href="#" style="text-decoration: none;color:#3399CC;" no="002" onclick="viewdetails(this);">查看详情</a>
+					</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>2020-2-20</td>
+					<td>请假申请</td>
+					<td>约见客户，了解客户需求</td>
+					<td>
+						<a href="#" style="text-decoration: none;color:#3399CC;" no="003">通过</a>&nbsp;|
+						<a href="#" style="text-decoration: none;color:#3399CC;" no="003" onclick="annotation(this);">作废</a>&nbsp;|
+						<a href="#" style="text-decoration: none;color:#3399CC;" no="003" onclick="viewdetails(this);">查看详情</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<!-- 批注 -->
+		<div id="annotate" class="easyui-window" title="批注" style="width:340px;height:290px" data-options="iconCls:'icon-add1-png',modal:true,collapsible:false,minimizable:false,maximizable:false,closed:true">
+		    <table border="0px" style="margin-top:8px;margin-left:10px;margin-right:10px;">
+		    	<tr>
+		    		<td><input class="easyui-textbox" data-options="multiline:true" style="width:300px;height:180px"></td>
+		    	</tr>
+		    	<tr>
+		    		<td align="center" height="50px"><a id="btn" href="#" class="easyui-linkbutton" data-options="">&nbsp;发&nbsp;&nbsp;送&nbsp;</a></td>
+		    	</tr>
+		    </table>
+		</div>
+
+		<!-- 查看详情 -->
+		<div id="viewdetails" class="easyui-window" title="查看详情" style="width:420px;height:400px" data-options="iconCls:'icon-tip',modal:true,collapsible:false,minimizable:false,maximizable:false,closed:true">
+		   <table border="0px" style="margin-top:8px;margin-left:10px;margin-right:10px;height: 340px;">
+		   	<tr>
+		   		<td>申请编号：</td>
+		   		<td><input class="easyui-textbox" data-options="readonly:true" style="width:300px"></td>
+		   	</tr>
+		   	<tr>
+		   		<td>申请时间：</td>
+		   		<td><input class="easyui-textbox" data-options="readonly:true" style="width:300px"></td>
+		   	</tr>
+		   	<tr>
+		   		<td>申请类型：</td>
+		   		<td><input class="easyui-textbox" data-options="readonly:true" style="width:300px;"></td>
+		   	</tr>
+		   	<tr>
+		   		<td>申请描述：</td>
+		   		<td><input class="easyui-textbox" data-options="multiline:true,readonly:true" style="width:300px;height:180px"></td>
+		   	</tr>
+		   </table>
+		</div>
+		
+		<script>
+			$(function(){
+				$("#applyDG").datagrid({
+					fit: true,
+					singleSelect: true,
+					pagination: true,
+					striped: true,
+					pageList: [5, 10, 15], //设置每页记录条数的列表        
+					pageSize: 10, //初始化页面尺寸（默认分页大小）        
+					pageNumber: 1 //初始化页面（默认显示第一页） 
+				});
+				
+				var p=$("#applyDG").datagrid("getPager");
+				$(p).pagination({
+				    onSelectPage: function (pageNumber, pageSize) {
+				        //$("#applyDG").datagrid("loadData", { total: , rows:  });
+				    }
+				});
+			});
+			
+			
+		function annotation(temp){
+			$("#annotate").window("open");
+		}
+			function viewdetails(temp){
+				$("#viewdetails").window("open");
+				$(".easyui-textbox").eq(1).next().text($(temp).parent().parent().siblings("td").eq(0).text());
+				$(".easyui-textbox").eq(2).next().text($(temp).parent().parent().siblings("td").eq(1).text());
+				$(".easyui-textbox").eq(3).next().text($(temp).parent().parent().siblings("td").eq(2).text());
+				$(".easyui-textbox").eq(4).next().text($(temp).parent().parent().siblings("td").eq(3).text());
+				
+			}
+		</script>
+
+	</body>
+</html>

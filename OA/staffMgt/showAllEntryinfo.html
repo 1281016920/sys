@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>员工信息管理</title>
+		<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css" />
+		<link rel="stylesheet" type="text/css" href="../themes/icon.css" />
+		<link rel="stylesheet" type="text/css" href="../css/demo.css" />
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+		<!--设置分页的中文提示-->
+		<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+	</head>
+	<body>
+		<table id="applyStaff" class="easyui-datagrid">
+		    <thead>
+				<tr>
+					<th data-options="field:'emp_code',title:'员工工号',width:100">员工工号</th>
+					<th data-options="field:'emp_name',title:'姓名',width:100">姓名</th>
+					<th data-options="field:'emp_gender',title:'性别',width:100">性别</th>
+					<th data-options="field:'emp_phonenumber',title:'电话',width:140">电话</th>
+					<th data-options="field:'operation',title:'操作',width:720">操作</th>
+				</tr>
+		    </thead>
+		    <tbody>
+				<tr>
+					<td>010</td>
+					<td>张三</td>
+					<td>男</td>
+					<td>11111111111</td>
+					<td>
+						<a href="#" style="text-decoration: none;color:#3399CC;" no="1" onclick="updateemp(this)">修改</a>&nbsp;|
+						<a href="#" style="text-decoration: none;color:#3399CC;" no="1" onclick="deleteemp(this)">删除</a>&nbsp;|
+						<a href="#" style="text-decoration: none;color:#3399CC;" no="2" onclick="viewdetails(this)">查看详情</a>
+					</td>
+				</tr>
+				<tr>
+					<td>011</td>
+					<td>李四</td>
+					<td>女</td>
+					<td>22222222222</td>
+					<td>
+						<a href="#" style="text-decoration: none;color:#3399CC;" no="2" onclick="updateemp(this)">修改</a>&nbsp;|
+						<a href="#" style="text-decoration: none;color:#3399CC;" no="2" onclick="deleteemp(this);">删除</a>&nbsp;|
+						<a href="#" style="text-decoration: none;color:#3399CC;" no="2" onclick="viewdetails(this);">查看详情</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div id="ue" class="easyui-window" title="修改" style="width:650px;height:510px" data-options="iconCls:'icon-user_edit-png',modal:true,collapsible:false,minimizable:false,maximizable:false,closed:true">
+			<table border="0px" style="margin:6px 16px;height:450px;">
+				<tr>
+					<td>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</td>
+					<td width="320px"><input class="easyui-textbox" data-options="" style="width:300px"></td>
+					<td rowspan="9">
+						证件照：<br>
+						<img id="updateShowEmpPhoto" src="img/default.jpg" style="border:1px dotted #3399CC;width:200px;height:300px;margin-top:8px;margin-bottom:10px;">
+						<br>
+						<input id="updateEmpPhoto" class="easyui-filebox" data-options="buttonText:'浏览',prompt:'请选择员工照片'" style="width:202px">
+						<br><br><br>
+					</td>
+				</tr>
+				<tr>
+					<td>身份证号：</td>
+					<td><input class="easyui-textbox" data-options="" style="width:300px"></td>
+				</tr>
+				<tr>
+					<td>性别：</td>
+					<td>
+						<form id="ff">
+		                    <div style="margin-top:6px;margin-bottom:6px;float:left;">
+						        <input class="easyui-radiobutton" data-options="labelPosition:'after',checked:true" name="sex" value="男" label="男">
+						    </div>
+						    <div style="margin-top:6px;margin-bottom:6px;float:left;">
+						        <input class="easyui-radiobutton" data-options="labelPosition:'after'" name="sex" value="女" label="女">
+						    </div>
+					    </form>
+					</td>
+				</tr>
+				<tr>
+					<td>生日：</td>
+					<td><input class="easyui-datetimebox" name="birthday" data-options="required:true,showSeconds:false" value="new Date()" style="width:300px"></td>
+				</tr>
+				<tr>
+					<td>入职时间：</td>
+					<td><input class="easyui-datetimebox" name="" data-options="required:true,showSeconds:false" value="new Date()" style="width:300px"></td>
+				</tr>
+				<tr>
+					<td>工资：</td>
+					<td><input class="easyui-textbox" data-options="" style="width:300px"></td>
+				</tr>
+				<tr>
+					<td>电话号码：</td>
+					<td><input class="easyui-textbox" data-options="" style="width:300px"></td>
+				</tr>
+				<tr>
+					<td>电子邮箱：</td>
+					<td><input class="easyui-textbox" data-options="" style="width:300px"></td>
+				</tr>
+				<tr>
+					<td>角色类型：</td>
+					<td>
+						<select id="cc" class="easyui-combobox" name="dept" style="width:300px;">
+						    <option value="aa">aitem1</option>
+						    <option>bitem2</option>
+						    <option>bitem3</option>
+						    <option>ditem4</option>
+						    <option>eitem5</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center">
+						<a id="btn" href="#" class="easyui-linkbutton" data-options="">&nbsp;修&nbsp;&nbsp;改&nbsp;</a>
+					</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+		<div id="de">您确定要删除该员工信息吗？</div>
+		<div id="vd" class="easyui-window" title="查看详情" style="width:650px;height:510px" data-options="iconCls:'icon-tip',modal:true,collapsible:false,minimizable:false,maximizable:false,closed:true">
+			<table border="0px" style="margin:6px 16px;height:450px;">
+				<tr>
+					<td>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</td>
+					<td width="320px"><input class="easyui-textbox" data-options="readonly:true" style="width:300px"></td>
+					<td rowspan="9">
+						证件照：<br>
+						<img src="../image/default.jpg" style="border:1px dotted #3399CC;width:200px;height:300px;margin-top:8px;margin-bottom:10px;">
+						<br>
+						<input class="easyui-textbox" data-options="readonly:true" style="width:200px">
+						<br><br><br>
+					</td>
+				</tr>
+				<tr>
+					<td>身份证号：</td>
+					<td><input class="easyui-textbox" data-options="readonly:true" style="width:300px"></td>
+				</tr>
+				<tr>
+					<td>性别：</td>
+					<td><input class="easyui-textbox" data-options="readonly:true" style="width:300px"></td>
+				</tr>
+				<tr>
+					<td>生日：</td>
+					<td><input class="easyui-textbox" data-options="readonly:true" style="width:300px"></td>
+				</tr>
+				<tr>
+					<td>入职时间：</td>
+					<td><input class="easyui-textbox" data-options="readonly:true" style="width:300px"></td>
+				</tr>
+				<tr>
+					<td>工资：</td>
+					<td><input class="easyui-textbox" data-options="readonly:true" style="width:300px"></td>
+				</tr>
+				<tr>
+					<td>电话号码：</td>
+					<td><input class="easyui-textbox" data-options="readonly:true" style="width:300px"></td>
+				</tr>
+				<tr>
+					<td>电子邮箱：</td>
+					<td><input class="easyui-textbox" data-options="readonly:true" style="width:300px"></td>
+				</tr>
+				<tr>
+					<td>角色类型：</td>
+					<td><input class="easyui-textbox" data-options="readonly:true" style="width:300px"></td>
+				</tr>
+			</table>
+		</div>
+		<script>
+			//设置日期框datetimebox显示日期的格式
+			$.fn.datetimebox.defaults.formatter = function(date){
+				var y = date.getFullYear();
+				var m = date.getMonth()+1;
+				var d = date.getDate();
+				var h=date.getHours();
+				var mm=date.getMinutes();
+				return y+'-'+m+'-'+d+" "+h+":"+mm;
+			}
+			//设置日期框datetimebox获取选中日期
+			$.fn.datetimebox.defaults.parser = function(s){
+				var t = Date.parse(s);
+				if (!isNaN(t)){
+					return new Date(t);
+				} else {
+					return new Date();
+				}
+			}
+			//设置组合框combobox的下拉框高度为自动高度
+			$.fn.combobox.defaults.panelHeight="auto";
+			//设置组合框combobox的下拉框高度最大为200
+			$.fn.combobox.defaults.panelMaxHeight=200;
+			
+			//加载事件
+			$(function(){
+				//设置datagrid
+		        $("#applyStaff").datagrid({
+		            fit: true,
+		            singleSelect: true,
+		            pagination: true,
+		            striped: true,
+		            pageList: [5, 10, 15], //设置每页记录条数的列表        
+		            pageSize: 10, //初始化页面尺寸（默认分页大小）        
+		            pageNumber: 1 //初始化页面（默认显示第一页） 
+		            //data: { total: , rows:  }
+		        });
+				
+				//分页，注意：分页要放在加载事件中才能刷新
+		        var p = $("#applyStaff").datagrid("getPager");
+		        $(p).pagination({
+		            onSelectPage: function (pageNumber, pageSize) {
+		                //$("#applyStaff").datagrid("loadData", { total: , rows:  });
+		            }
+		        });
+			});
+			
+			//显示选中的员工照片
+			$('#updateEmpPhoto').filebox({
+			 	onChange:function(newValue, oldValue){
+			 		//alert(newValue+":"+$(this).filebox("getValue"));
+			 		$("#updateShowEmpPhoto").attr("src","../image/"+newValue);
+			 	}
+			});
+			
+			//打开修改员工信息的窗体
+			function updateemp(temp){
+				//alert($(temp).attr("no"));
+				$('#ue').window('open');
+			}
+			
+			//打开查看员工信息的窗体
+			function viewdetails(temp){
+				$('#vd').window('open');
+			}
+			
+			//打开删除提示的窗体
+			function deleteemp(temp){
+				$('#de').dialog({
+				    title: '删除',
+				    width: 230,
+				    height: 120,
+				    closed: false,
+				    modal: true,
+				    buttons:[{
+						text:'确定',
+						handler:function(){}
+					},{
+						text:'取消',
+						handler:function(){
+							$('#de').dialog('close');
+						}
+					}]
+				});
+			}
+		</script>
+	</body>
+</html>

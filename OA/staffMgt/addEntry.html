@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>员工入职</title>
+		<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css" />
+		<link rel="stylesheet" type="text/css" href="../themes/icon.css" />
+		<link rel="stylesheet" type="text/css" href="../css/demo.css" />
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+		<!--设置分页的中文提示-->
+		<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+	</head>
+	<body>
+		<table border="0px" style="margin:6px 16px;height:450px;">
+			<tr>
+				<td>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</td>
+				<td width="500px"><input id="txtEmpName" class="easyui-textbox" data-options="" style="width:300px"></td>
+				<td rowspan="9">
+					证件照：<br>
+					<!--显示默认照片-->
+					<img id="showEmpPhoto" src="../image/default.jpg" style="border:1px dotted #3399CC;width:200px;height:300px;margin-top:8px;margin-bottom:10px;">
+					<br>
+					<input id="empPhoto" class="easyui-filebox" data-options="buttonText:'浏览',prompt:'请选择员工照片'" style="width:202px">
+					<br><br><br>
+				</td>
+			</tr>
+			<tr>
+				<td>身份证号：</td>
+				<td><input id="txtEmpIdcardnumber" class="easyui-textbox" data-options="" style="width:300px"></td>
+			</tr>
+			<tr>
+				<td>性别：</td>
+				<td>
+					<form id="rdoEmpGender">
+		                <div style="margin-top:6px;margin-bottom:6px;float:left;">
+					        <input id="rdoNan" class="easyui-radiobutton" data-options="labelPosition:'after',checked:true" name="sex" value="男" label="男">
+					    </div>
+					    <div style="margin-top:6px;margin-bottom:6px;float:left;">
+					        <input id="rdoNv" class="easyui-radiobutton" data-options="labelPosition:'after'" name="sex" value="女" label="女">
+					    </div>
+				    </form>
+				</td>
+			</tr>
+			<tr>
+				<td>生日：</td>
+				<td><input id="dateEmpBirthday" class="easyui-datetimebox" name="birthday" data-options="required:true,showSeconds:false" value="new Date()" style="width:300px"></td>
+			</tr>
+			<tr>
+				<td>入职时间：</td>
+				<td><input id="dateEmpEntrytime" class="easyui-datetimebox" name="" data-options="required:true,showSeconds:false" value="new Date()" style="width:300px"></td>
+			</tr>
+			<tr>
+				<td>工资：</td>
+				<td><input id="txtEmpSalary" class="easyui-textbox" data-options="" style="width:300px"></td>
+			</tr>
+			<tr>
+				<td>电话号码：</td>
+				<td><input id="txtEmpPhonenumber" class="easyui-textbox" data-options="" style="width:300px"></td>
+			</tr>
+			<tr>
+				<td>电子邮箱：</td>
+				<td><input id="txtEmpEmail" class="easyui-textbox" data-options="" style="width:300px"></td>
+			</tr>
+			<tr>
+				<td>角色类型：</td>
+				<td>
+					<select id="selEmpRoletype" class="easyui-combobox" name="dept" style="width:300px;">
+					    <option value="aa">aitem1</option>
+					    <option>bitem2</option>
+					    <option>bitem3</option>
+					    <option>ditem4</option>
+					    <option>eitem5</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="right">
+					<a href="#" style="text-decoration: none;color:#3399CC;">发送申请</a>&nbsp;&nbsp;
+					<a id="btnReset" href="#" style="text-decoration: none;color:#3399CC;margin-right:200px;">重填</a>
+				</td>
+				<td></td>
+			</tr>
+		</table>
+		
+		<script>
+			//设置日期框datetimebox显示日期的格式
+			$.fn.datetimebox.defaults.formatter = function(date){
+				var y = date.getFullYear();
+				var m = date.getMonth()+1;
+				var d = date.getDate();
+				var h=date.getHours();
+				var mm=date.getMinutes();
+				return y+'-'+m+'-'+d+" "+h+":"+mm;
+			}
+			//设置日期框datetimebox获取选中日期
+			$.fn.datetimebox.defaults.parser = function(s){
+				var t = Date.parse(s);
+				if (!isNaN(t)){
+					return new Date(t);
+				} else {
+					return new Date();
+				}
+			}
+			//设置组合框combobox的下拉框高度为自动高度
+			$.fn.combobox.defaults.panelHeight="auto";
+			//设置组合框combobox的下拉框高度最大为200
+			$.fn.combobox.defaults.panelMaxHeight=200;
+			
+			//显示选中的员工照片
+			$('#empPhoto').filebox({
+			 	onChange:function(newValue, oldValue){
+			 		//alert(newValue+":"+$(this).filebox("getValue"));
+			 		$("#showEmpPhoto").attr("src","../image/"+newValue);
+			 	}
+			});
+			 
+			//重置页面
+			$("#btnReset").click(function(){
+				$("#txtEmpName").textbox("setValue","");
+				$("#showEmpPhoto").attr("src","img/default.jpg");
+				$("#empPhoto").filebox("setText", "");
+				$("#txtEmpIdcardnumber").textbox("setValue","");
+				$("#rdoNan").radiobutton({
+				 	checked:true
+				});
+				$("#dateEmpBirthday").datetimebox("setValue","new Date()");
+				$("#dateEmpEntrytime").datetimebox("setValue","new Date()");
+				$("#txtEmpSalary").textbox("setValue","");
+				$("#txtEmpPhonenumber").textbox("setValue","");
+				$("#txtEmpEmail").textbox("setValue","");
+				$("#selEmpRoletype").combobox("select","aitem1");
+			});
+		</script>
+	</body>
+</html>

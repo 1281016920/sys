@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>公司花费添加</title>
+		<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css" />
+		<link rel="stylesheet" type="text/css" href="../themes/icon.css" />
+		<link rel="stylesheet" type="text/css" href="../css/demo.css" />
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+		<!--设置分页的中文提示-->
+		<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+	</head>
+	<body>
+		<table border="0px" style="margin:6px 16px;height:390px;">
+			<tr>
+				<td>花费金额：</td>
+				<td width="400px"><input id="txtAmountSpent" class="easyui-textbox" data-options="" style="width:300px"></td>
+				<td rowspan="3">
+					发票上传：<br>
+					<img id="imgInvoice" src="../img/defaultinvoice.jpg" style="border:1px dotted #3399CC;width:500px;height:260px;margin-top:8px;margin-bottom:10px;">
+					<br>
+					<input id="fileBrowse" class="easyui-filebox" data-options="buttonText:'浏览',prompt:'请选择发票'" style="width:502px">
+				</td>
+			</tr>
+			<tr>
+				<td>产生时间：</td>
+				<td><input id="dateGenerationTime" class="easyui-datetimebox" name="birthday" data-options="required:true,showSeconds:false" value="new Date()" style="width:300px"></td>
+			</tr>
+			<tr>
+				<td>费用描述：</td>
+				<td><input id="txtCostDescription" class="easyui-textbox" data-options="multiline:true" style="width:300px;height:180px"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="right">
+					<a href="#" style="text-decoration: none;color:#3399CC;">发送申请</a>&nbsp;&nbsp;
+					<a id="btnReset" href="#" style="text-decoration: none;color:#3399CC;margin-right:100px;">重填</a>
+				</td>
+				<td></td>
+			</tr>
+		</table>
+		<script>
+			//设置日期框datetimebox显示日期的格式
+			$.fn.datetimebox.defaults.formatter = function(date){
+				var y = date.getFullYear();
+				var m = date.getMonth()+1;
+				var d = date.getDate();
+				var h=date.getHours();
+				var mm=date.getMinutes();
+				return y+'-'+m+'-'+d+" "+h+":"+mm;
+			}
+			//设置日期框datetimebox获取选中日期
+			$.fn.datetimebox.defaults.parser = function(s){
+				var t = Date.parse(s);
+				if (!isNaN(t)){
+					return new Date(t);
+				} else {
+					return new Date();
+				}
+			}
+			
+			//显示选中的员工照片
+			$('#fileBrowse').filebox({
+			 	onChange:function(newValue, oldValue){
+			 		//alert(newValue+":"+$(this).filebox("getValue"));
+			 		$("#imgInvoice").attr("src","../img/"+newValue);
+			 	}
+			});
+			
+			//重置页面
+			$("#btnReset").click(function(){
+				$("#txtAmountSpent").textbox("setValue","");
+				$("#imgInvoice").attr("src","img/defaultinvoice.jpg");
+				$("#fileBrowse").filebox("setText", "");
+				$("#dateGenerationTime").datetimebox("setValue","new Date()");
+				$("#txtCostDescription").textbox("setValue","");
+			});
+		</script>
+	</body>
+</html>

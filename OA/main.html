@@ -2,12 +2,14 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>员工管理系统</title>
+		<title>公司管理系统</title>
 		<link rel="stylesheet" type="text/css" href="themes/default/easyui.css" />
-		<link rel="stylesheet" type="text/css" href="themes/icon.css" />
+		<link rel="stylesheet" type="text/css" href="themes/icon.css"/>
 		<link rel="stylesheet" type="text/css" href="css/demo.css" />
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+		<!--设置分页的中文提示-->
+		<script type="text/javascript" src="js/easyui-lang-zh_CN.js"></script>
 
 		<style>
 			.head{
@@ -19,49 +21,63 @@
 				border: 0px solid red;
 			}
 			.head>div:nth-of-type(1) {
-				font-size: 36px;
+				font-size: 24px;
 				margin-left: 20px;
-				line-height: 80px;
+				line-height: 78px;
 				
 			}
 			.head>div:nth-of-type(2) {
 				color: white;
 				font-size: 14px;
 				text-align: right;
-				
 				position: absolute;
 				right: 10px;
-			}
+			} 
 			.head_right div{
-				margin-top: 20px;
+				margin-top: 10px;
+			}
+			.head_right a {
+				text-decoration: none;
+				color:white;
 			}
 			/* !-- 侧边栏 -- */
 			#tt {
 				display: none;
 			}
-			
 			#aa ul{
-				margin: 0;
-				padding: 0;
+				margin: 0px;
+				padding: 10px;
 			}
 			#aa li a {
 				text-decoration: none;
-				color: #000000;
 			}
-			#aa li{
-				background:url(themes/icons/redo.png) no-repeat 0 center;
-				text-indent: 20px;
-				height: 30px;
-				line-height: 30px;
+			
+			.easyui-accordion li{
+				line-height:30px;
 				list-style-type: none;
-				background-color: #ccc;
-				font-size: 16px;
-				margin: 10px 0;
-				margin-left: 5px;
-				cursor: pointer;
 			}
-			#aa li:hover{
-				background-color: #666;
+			.easyui-accordion a{
+				text-decoration: none;
+				color:#000;
+			}
+			.easyui-accordion a:hover{
+				text-decoration: none;
+				color:#666;
+			}
+			.botton {
+				background-color: #fff;
+			}
+			.welcome {
+				color:#3399CC;
+				font-family:华文行楷;
+				font-size:28px;
+				height: 100%;
+				display: -moz-box;/*兼容Firefox*/
+				display: -webkit-box;/*兼容FSafari、Chrome*/
+				-moz-box-align: center;/*兼容Firefox*/
+				-webkit-box-align: center;/*兼容FSafari、Chrome */
+				-moz-box-pack: center;/*兼容Firefox*/
+				-webkit-box-pack: center;/*兼容FSafari、Chrome */
 			}
 		</style>
 
@@ -77,33 +93,154 @@
 				$("#aa").accordion({
 					fit:true
 				});
-				$("li").click(function() {
+				$("#left li").click(function() {
 					$(".welcome").css("display","none");
 					$("#tt").css("display","block");
-					if(!$("#tt").tabs("exists",$(this).text())){
-						$('#tt').tabs('add', {
-							title: $(this).text(),
-							closable: true,
-						/* 	content:"<table id='table'></table>", */
-							/* href:"index.html" */
-						});
-						
-						/* $('#table').datagrid({	
-						    url:'datagrid_data.json', 
-						    columns:[[
-								{field:'code',title:'Code',width:100},
-								{field:'name',title:'Name',width:100},
-								{field:'price',title:'Price',width:100,align:'right'}
-						    ]],
-							data:[
-								{code:"1",name:'1',price:'1'},
-								{code:"1",name:'1',price:'1'},
-								{code:"1",name:'1',price:'1'}
-							],
-							rownumbers:true,
-							pagination:true
-						}); */
+					
+					//根据超链接的文本添加选项卡
+					switch($(this).text()){
+						case "人事申请":
+							if(!$("#tt").tabs("exists",'财务申请')){
+								$('#tt').tabs('add', {
+									title: '财务申请',
+									closable: true,
+									href:"applyFor/personnel.html"
+								});
+							}
+							break;
+						case "财务申请":
+							if(!$('#tt').tabs('exists', '财务申请')){
+								$("#tt").tabs("add",{
+									title:'财务申请',
+									closable:true,
+									href:"applyFor/financePutIn.html"
+									//content: '<iframe scrolling="auto" frameborder="0"  src="showDetaliApply.html" style="width:100%;height:100%;"></iframe>'
+								});
+							}
+							break;
+						case "员工入职":
+							if(!$('#tt').tabs('exists', '员工入职')){
+								$("#tt").tabs("add",{
+									title:'员工入职',
+									closable:true,
+									iconCls:'icon-user_edit-png',
+									href:'staffMgt/addEntry.html'
+									//content: '<iframe scrolling="auto" frameborder="0"  src="addEmpInfo.html" style="width:100%;height:100%;"></iframe>'
+								});
+							}
+							break;
+						case "员工调岗":
+							if(!$('#tt').tabs('exists', '员工调岗')){
+								$("#tt").tabs("add",{
+									title:'员工调岗',
+									closable:true,
+									iconCls:'icon-user_edit-png',
+									href:'staffMgt/showTransfer.html'
+									//content: '<iframe scrolling="auto" frameborder="0"  src="showEmpChangeRoleApply.html" style="width:100%;height:100%;"></iframe>'
+								});
+							}
+							break;
+						case "员工信息管理":
+							if(!$('#tt').tabs('exists', '员工信息管理')){
+								$("#tt").tabs("add",{
+									title:'员工信息管理',
+									closable:true,
+									iconCls:'icon-user_edit-png',
+									href:'staffMgt/showAllEntryinfo.html'
+									//content: '<iframe scrolling="auto" frameborder="0"  src="showAllEmpInfo.html" style="width:100%;height:100%;"></iframe>'
+								});
+							}
+							break;
+						case "年度收支报表":
+							if(!$('#tt').tabs('exists', '年度收支报表')){
+								$("#tt").tabs("add",{
+									title:'年度收支报表',
+									closable:true,
+									iconCls:'icon-money_yen-png',
+									href:'financegl/showAllIncEpdInfo.html'
+									//content: '<iframe scrolling="auto" frameborder="0"  src="showAllIncEpdInfo.html" style="width:100%;height:100%;"></iframe>'
+								});
+							}
+							break;
+						case "公司花费添加":
+							if(!$('#tt').tabs('exists', '公司花费添加')){
+								$("#tt").tabs("add",{
+									title:'公司花费添加',
+									closable:true,
+									iconCls:'icon-money_yen-png',
+									href:'financegl/addCostApply.html'
+									//content: '<iframe scrolling="auto" frameborder="0"  src="addCostApply.html" style="width:100%;height:100%;"></iframe>'
+								});
+							}
+							break;
+						case "工资发放":
+							if(!$('#tt').tabs('exists', '工资发放')){
+								$("#tt").tabs("add",{
+									title:'工资发放',
+									closable:true,
+									iconCls:'icon-money_yen-png',
+									href:'financegl/showAllSalary.html'
+									//content: '<iframe scrolling="auto" frameborder="0"  src="showAllSalary.html" style="width:100%;height:100%;"></iframe>'
+								});
+							}
+							break;
+						case "公司收入条目添加":
+							if(!$('#tt').tabs('exists', '公司收入条目添加')){
+								$("#tt").tabs("add",{
+									title:'公司收入条目添加',
+									closable:true,
+									iconCls:'icon-money_yen-png',
+									href:'financegl/addIncomeCost.html'
+									//content: '<iframe scrolling="auto" frameborder="0"  src="addIncomeCost.html" style="width:100%;height:100%;"></iframe>'
+								});
+							}
+							break;
+						case "查看记录":
+							if(!$('#tt').tabs('exists', '查看记录')){
+								$("#tt").tabs("add",{
+									title:'查看记录',
+									closable:true,
+									iconCls:'icon-page_go-png',
+									href:'clockingl/ViewLog.html'
+									//content: '<iframe scrolling="auto" frameborder="0"  src="showAllApply.html" style="width:100%;height:100%;"></iframe>'
+								});
+							}
+							break;
+						case "查看申请":
+							if(!$('#tt').tabs('exists', '查看申请')){
+								$("#tt").tabs("add",{
+									title:'查看申请',
+									closable:true,
+									iconCls:'icon-page_go-png',
+									href:'sendApplyFor/showAllApply.html'
+									//content: '<iframe scrolling="auto" frameborder="0"  src="showAllApply.html" style="width:100%;height:100%;"></iframe>'
+								});
+							}
+							break;
+						case "公司报销":
+							if(!$('#tt').tabs('exists', '公司报销')){
+								$("#tt").tabs("add",{
+									title:'公司报销',
+									closable:true,
+									iconCls:'icon-page_go-png',
+									href:'sendApplyFor/addApplyDetailed.html'
+									//content: '<iframe scrolling="auto" frameborder="0"  src="addApplyDetailed.html" style="width:100%;height:100%;"></iframe>'
+								});
+							}
+							break;
+						case "公司通讯录":
+							if(!$('#tt').tabs('exists', '公司通讯录')){
+								$("#tt").tabs("add",{
+									title:'公司通讯录',
+									closable:true,
+									iconCls:'icon-user_group-png',
+									href:'addressList/addressBook.html'
+									//content: '<iframe scrolling="auto" frameborder="0"  src="addressBook.html" style="width:100%;height:100%;"></iframe>'
+								});
+							}
+							break;
 					}
+					
 				})
 				
 				$('#tt').tabs({
@@ -120,9 +257,9 @@
 			})
 		</script>
 	</head>
-	<body class="easyui-layout">
+	<body class="easyui-layout">  
 		<!-- 标题 -->
-		<div data-options="region:'north',split:true" style="height:100px;background-color: #0092DC;">
+		<div data-options="region:'north',split:false," style="height:80px;background-color: #0092DC;">
 			<div class="head">
 				<div><label>员工管理系统</label></div>
 				<div class="head_right">
@@ -132,54 +269,54 @@
 			</div>
 		</div>
 		<!-- 侧边栏 -->
-		<div id="left" data-options="region:'west',title:'菜单',split:true" style="width:240px;">
+		<div id="left" data-options="region:'west',title:'菜单',iconCls:'icon-org-png',split:false" style="width:200px;">
 
 			<div id="aa" class="easyui-accordion" style="width:300px;">
 				
-				<div title="申请管理"  data-options="iconCls:'icon-application_form_edit'" >
+				<div title="申请管理" data-options="iconCls:'icon-book_edit-png'"  >
 					<ul>
-						<li><a href="#">人事审批</a></li>
-						<li><a href="#">财务申请</a></li>
+						<li><img src="img/application_form_edit.png" align="center"><a href="#">人事审批</a></li>
+						<li><img src="img/application_form_edit.png" align="center"><a href="#">财务申请</a></li>
 					</ul>
 				</div>
-				<div title="员工管理" data-options="iconCls:'icon-user_group'">
+				<div title="员工管理" data-options="iconCls:'icon-user_b-png'">
 					<ul>
-						<li><a href="#">员工入职</a></li>
-						<li><a href="#">员工调岗</a></li>
-						<li><a href="#">员工信息管理</a></li>
+						<li><img src="img/user_edit.png" align="center"><a href="#">员工入职</a></li>
+						<li><img src="img/user_edit.png" align="center"><a href="#">员工调岗</a></li>
+						<li><img src="img/user_edit.png" align="center"><a href="#">员工信息管理</a></li>
 					</ul>
 				</div>
-				<div title="财务管理" data-options = "iconCls:'icon-money_yen'">
+				<div title="财务管理" data-options="iconCls:'icon-chart_bar-png'">
 					<ul>
-						<li><a href="#">年度收支报告</a></li>
-						<li><a href="#">公司花费添加</a></li>
-						<li><a href="#">工资发放</a></li>
-						<li><a href="#">工资收入条目添加</a></li>
+						<li><img src="img/money_yen.png" align="center"><a href="#">年度收支报告</a></li>
+						<li><img src="img/money_yen.png" align="center"><a href="#">公司花费添加</a></li>
+						<li><img src="img/money_yen.png" align="center"><a href="#">工资发放</a></li>
+						<li><img src="img/money_yen.png" align="center"><a href="#">工资收入条目添加</a></li>
 					</ul>
 				</div>
-				<div title="考勤管理">
+				<div title="考勤管理" data-options = "iconCls:'icon-edit'">
 					<ul>
 						<li><a href="#">查看记录</a></li>
 						
 					</ul>
 				</div>
-				<div title="发送申请">
+				<div title="发送申请" data-options="iconCls:'icon-status_online-png'">
 					<ul>
-						<li><a href="#">所有申请</a></li>
-						<li><a href="#">公司报销</a></li>
+						<li><img src="img/page_go.png" align="center"><a href="#">查看申请</a></li>
+						<li><img src="img/page_go.png" align="center"><a href="#">公司报销</a></li>
 					</ul>
 				</div>
-				<div title="通讯录">
+				<div title="通讯录"  data-options="iconCls:'icon-user_group-png'">
 					<ul>
-						<li><a href="#">公司通讯录</a></li>
+						<li><img src="img/user_group.png" align="center"><a href="#">公司通讯录</a></li>
 					</ul>
 				</div>
 			</div>
 		</div>
 		
 		<!-- 显示内容界面 -->
-		<div id="botton" data-options="region:'center'"style="padding:5px;background:#eee;">
-			<div class="welcome">欢迎使用</div>
+		<div id="botton" data-options="region:'center'"style="padding:5px;">
+			<div class="welcome">欢迎使用公司管理系统</div>
 			<!-- Tabs 标签页/选项卡 -->
 			<div id="tt" class="easyui-tabs" style="width:500px;height:250px;">
 

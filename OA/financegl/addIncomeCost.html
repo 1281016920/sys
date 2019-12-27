@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>公司收入条目添加</title>
+		<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css" />
+		<link rel="stylesheet" type="text/css" href="../themes/icon.css" />
+		<link rel="stylesheet" type="text/css" href="../css/demo.css" />
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+		<!--设置分页的中文提示-->
+		<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+	</head>
+	<body>
+		<table border="0px" style="margin:6px 30px;width:700px;height:390px;">
+			<tr>
+				<td>收入金额：</td>
+				<td width="400px"><input id="txtAmountOfIncome" class="easyui-textbox" data-options="" style="width:600px"></td>
+			</tr>
+			<tr>
+				<td>收入描述：</td>
+				<td><input id="txtIncomeDescription" class="easyui-textbox" data-options="multiline:true" style="width:600px;height:240px"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="right" height="50px">
+					<a id="btn" href="#" class="easyui-linkbutton" data-options="">&nbsp;添加收入&nbsp;</a>
+					<a id="btnReset" href="#" class="easyui-linkbutton" data-options="" style="margin-right:30px;">&nbsp;重&nbsp;&nbsp;填&nbsp;</a>
+				</td>
+			</tr>
+		</table>
+		<script>
+			//重置页面
+			$("#btnReset").click(function(){
+				$("#txtAmountOfIncome").textbox("setValue","");
+				$("#txtIncomeDescription").textbox("setValue","");
+			});
+		</script>
+	</body>
+</html>

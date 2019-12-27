@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>查看申请</title>
+		<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css" />
+		<link rel="stylesheet" type="text/css" href="../themes/icon.css" />
+		<link rel="stylesheet" type="text/css" href="../css/demo.css" />
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+		<!--设置分页的中文提示-->
+		<script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
+	</head>
+	<body>
+		<table id="PersonnelApplicationDG" class="easyui-datagrid">
+		    <thead>
+				<tr>
+					<th data-options="field:'apply_id',title:'申请编号',width:100">申请编号</th>
+					<th data-options="field:'apply_date',title:'申请时间',width:160">申请时间</th>
+					<th data-options="field:'review_status',title:'申请状态',width:100">申请状态</th>
+					<th data-options="field:'apply_remark',title:'申请描述',width:620">申请描述</th>
+					<th data-options="field:'operation',title:'申请操作',width:180">申请操作</th>
+				</tr>
+		    </thead>
+		    <tbody>
+				<tr>
+					<td>1</td>
+					<td>2020-2-23</td>
+					<td>待审核</td>
+					<td>由于不小心遗失身份证，需要请假重新办理身份证</td>
+					<td>
+						<a href="#" style="text-decoration: none;color:#3399CC;" no="1">发送</a>&nbsp;|
+						<a href="#" style="text-decoration: none;color:#3399CC;" no="1" onclick="modify(this);">修改</a>&nbsp;|
+						<a href="#" style="text-decoration: none;color:#3399CC;" no="1" onclick="withdraw(this);">撤回</a>
+					</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>2020-2-26</td>
+					<td>待审核</td>
+					<td>需要考驾驶证的科目一，特此请假</td>
+					<td>
+						<a href="#" style="text-decoration: none;color:#3399CC;" no="2">发送</a>&nbsp;|
+						<a href="#" style="text-decoration: none;color:#3399CC;" no="2" onclick="modify(this);">修改</a>&nbsp;|
+						<a href="#" style="text-decoration: none;color:#3399CC;" no="2" onclick="withdraw(this);">撤回</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div id="addmo" class="easyui-window" title="添加申请" style="width:420px;height:430px" data-options="iconCls:'icon-edit',modal:true,collapsible:false,minimizable:false,maximizable:false,closed:true">
+			<table border="0px" style="margin-top:8px;margin-left:10px;margin-right:10px;height: 380px;">
+				<tr>
+					<td>申请时间：</td>
+					<td><input class="easyui-datetimebox" name="" data-options="required:true,showSeconds:false" value="new Date()" style="width:300px"></td>
+				</tr>
+				<tr>
+					<td>申请类型：</td>
+					<td>
+						<select id="cc" class="easyui-combobox" name="dept" style="width:300px;">
+						    <option value="aa">aitem1</option>
+						    <option>bitem2</option>
+						    <option>bitem3</option>
+						    <option>ditem4</option>
+						    <option>eitem5</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>申请描述：</td>
+					<td><input class="easyui-textbox" data-options="multiline:true" style="width:300px;height:180px"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td align="center"><a id="btn" href="#" class="easyui-linkbutton" data-options="">&nbsp;添&nbsp;&nbsp;加&nbsp;</a></td>
+				</tr>
+			</table>
+		</div>
+		<div id="wd">您确定要撤回当前申请吗？</div>
+		<div id="mo" class="easyui-window" title="修改申请" style="width:420px;height:500px" data-options="iconCls:'icon-edit',modal:true,collapsible:false,minimizable:false,maximizable:false,closed:true">
+			<table border="0px" style="margin-top:8px;margin-left:10px;margin-right:10px;height: 440px;">
+				<tr>
+					<td>申请编号：</td>
+					<td><input class="easyui-textbox" data-options="readonly:true" style="width:300px"></td>
+				</tr>
+				<tr>
+					<td>申请时间：</td>
+					<td><input class="easyui-datetimebox" name="" data-options="required:true,showSeconds:false" value="new Date()" style="width:300px"></td>
+				</tr>
+				<tr>
+					<td>申请类型：</td>
+					<td>
+						<select id="cc" class="easyui-combobox" name="dept" style="width:300px;">
+						    <option value="aa">aitem1</option>
+						    <option>bitem2</option>
+						    <option>bitem3</option>
+						    <option>ditem4</option>
+						    <option>eitem5</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>申请描述：</td>
+					<td><input class="easyui-textbox" data-options="multiline:true" style="width:300px;height:180px"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td align="center"><a id="btn" href="#" class="easyui-linkbutton" data-options="">&nbsp;修&nbsp;&nbsp;改&nbsp;</a></td>
+				</tr>
+			</table>
+		</div>
+	
+		<script>
+			//设置日期框datetimebox显示日期的格式
+			$.fn.datetimebox.defaults.formatter = function(date){
+				var y = date.getFullYear();
+				var m = date.getMonth()+1;
+				var d = date.getDate();
+				var h=date.getHours();
+				var mm=date.getMinutes();
+				return y+'-'+m+'-'+d+" "+h+":"+mm;
+			}
+			//设置日期框datetimebox获取选中日期
+			$.fn.datetimebox.defaults.parser = function(s){
+				var t = Date.parse(s);
+				if (!isNaN(t)){
+					return new Date(t);
+				} else {
+					return new Date();
+				}
+			}
+			//设置组合框combobox的下拉框高度为自动高度
+			$.fn.combobox.defaults.panelHeight="auto";
+			//设置组合框combobox的下拉框高度最大为200
+			$.fn.combobox.defaults.panelMaxHeight=200;
+			
+			//加载事件
+			$(function(){
+				//设置datagrid
+		        $("#PersonnelApplicationDG").datagrid({
+		        	title:'人事申请',
+		        	iconCls:'icon-add1-png',
+
+		        	//工具栏，添加人事申请
+		        	tools:[{
+						iconCls:'icon-add',
+						handler:function(){
+							//打开添加窗体
+							$('#addmo').window('open');
+						}			
+					}],
+		            fit: true,
+		            singleSelect: true,
+		            pagination: true,
+		            striped: true,
+		            pageList: [5, 10, 15], //设置每页记录条数的列表        
+		            pageSize: 10, //初始化页面尺寸（默认分页大小）        
+		            pageNumber: 1 //初始化页面（默认显示第一页） 
+		            //data: { total: , rows:  }
+		        });
+				
+				//分页，注意：分页要放在加载事件中才能刷新
+		        var p = $("#PersonnelApplicationDG").datagrid("getPager");
+		        $(p).pagination({
+		            onSelectPage: function (pageNumber, pageSize) {
+		                //$("#PersonnelApplicationDG").datagrid("loadData", { total: , rows:  });
+		            }
+		        });
+			});
+			
+			//打开修改窗体
+			function modify(temp){
+				//alert($(temp).attr("no"));
+				$('#mo').window('open');
+			}
+			
+			//撤回申请
+			function withdraw(temp){
+				$('#wd').dialog({
+				    title: '撤回',
+				    width: 230,
+				    height: 120,
+				    closed: false,
+				    modal: true,
+				    buttons:[{
+						text:'确定',
+						handler:function(){}
+					},{
+						text:'取消',
+						handler:function(){
+							$('#wd').dialog('close');
+						}
+					}]
+				});
+			}
+		</script>
+	</body>
+</html>
