@@ -78,35 +78,71 @@
 					fit:true
 				});
 				$("#left li").click(function() {
+					var site;
 					$(".welcome").css("display","none");
 					$("#tt").css("display","block");
+					
 					if(!$("#tt").tabs("exists",$(this).text())){
+						
+						 switch($(this).text()){
+							 /* 申请管理*/
+							case "人事审批":
+									site="applyFor/personnel.html";
+								break;
+							case "财务申请":
+								site="applyFor/financePutIn.html";
+								break;
+								/* 员工管理 */
+							case "员工入职":
+								site="staffMgt/entry.html";
+								break;
+							case "员工调岗":
+								site="staffMgt/transfer.html";
+								break;
+							case "员工信息管理":
+								site="staffMgt/info.html";
+								break;
+								/* 财务管理 */
+							case "年度收支报告":
+								site="finance/budget.html";
+								break;
+							case "公司花费添加":
+								site="finance/costadd.html";
+								break;
+							case "工资发放":
+								site="finance/payoff.html";
+								break;
+							case "公司收入条目添加":
+								site="finance/corinc.html";
+								break;
+								/* 考勤管理 */
+							case "查看记录":
+								site="checkingin/checkingin.html";
+								break;
+								/* 发送申请 */
+							case "所有申请":
+								site="sendapply/apply.html";
+								break;
+							case "公司报销":
+								site="sendapply/baoxiao.html";
+								break;
+								/* 通讯录 */
+							case "公司通讯录":
+								site="addresslist/addresslist.html";
+								break;
+							
+						} 
+						
 						$('#tt').tabs('add', {
 							title: $(this).text(),
 							closable: true,
 							
 							onOpen:function(){
-								
-							}
+								 
+							},
 						/* 	content:"<table id='table'></table>", */
-							/* href:"index.html" */
+							href:site
 						});
-						
-						/* $('#table').datagrid({	
-						    url:'datagrid_data.json', 
-						    columns:[[
-								{field:'code',title:'Code',width:100},
-								{field:'name',title:'Name',width:100},
-								{field:'price',title:'Price',width:100,align:'right'}
-						    ]],
-							data:[
-								{code:"1",name:'1',price:'1'},
-								{code:"1",name:'1',price:'1'},
-								{code:"1",name:'1',price:'1'}
-							],
-							rownumbers:true,
-							pagination:true
-						}); */
 					}
 				})
 				
@@ -158,7 +194,7 @@
 						<li><a href="#">年度收支报告</a></li>
 						<li><a href="#">公司花费添加</a></li>
 						<li><a href="#">工资发放</a></li>
-						<li><a href="#">工资收入条目添加</a></li>
+						<li><a href="#">公司收入条目添加</a></li>
 					</ul>
 				</div>
 				<div title="考勤管理" data-options = "iconCls:'icon-chart_bar'">
