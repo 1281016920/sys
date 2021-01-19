@@ -94,6 +94,7 @@
 					fit:true
 				});
 				$("#left li").click(function() {
+<<<<<<< HEAD
 					$(".welcome").css("display","none");
 					$("#tt").css("display","block");
 					
@@ -239,6 +240,73 @@
 								});
 							}
 							break;
+=======
+					var site;
+					$(".welcome").css("display","none");
+					$("#tt").css("display","block");
+					
+					if(!$("#tt").tabs("exists",$(this).text())){
+						
+						 switch($(this).text()){
+							 /* 申请管理*/
+							case "人事审批":
+									site="applyFor/personnel.html";
+								break;
+							case "财务申请":
+								site="applyFor/financePutIn.html";
+								break;
+								/* 员工管理 */
+							case "员工入职":
+								site="staffMgt/entry.html";
+								break;
+							case "员工调岗":
+								site="staffMgt/transfer.html";
+								break;
+							case "员工信息管理":
+								site="staffMgt/info.html";
+								break;
+								/* 财务管理 */
+							case "年度收支报告":
+								site="finance/budget.html";
+								break;
+							case "公司花费添加":
+								site="finance/costadd.html";
+								break;
+							case "工资发放":
+								site="finance/payoff.html";
+								break;
+							case "公司收入条目添加":
+								site="finance/corinc.html";
+								break;
+								/* 考勤管理 */
+							case "查看记录":
+								site="checkingin/checkingin.html";
+								break;
+								/* 发送申请 */
+							case "所有申请":
+								site="sendapply/apply.html";
+								break;
+							case "公司报销":
+								site="sendapply/baoxiao.html";
+								break;
+								/* 通讯录 */
+							case "公司通讯录":
+								site="addresslist/addresslist.html";
+								break;
+							
+						} 
+						
+						$('#tt').tabs('add', {
+							title: $(this).text(),
+							closable: true,
+							
+							onOpen:function(){
+								 
+							},
+						/* 	content:"<table id='table'></table>", */
+							href:site
+						});
+>>>>>>> c40ac752a18ea81186e8a7915a0ed33d04396276
 					}
 					
 				})
@@ -279,7 +347,11 @@
 						<li><img src="img/application_form_edit.png" align="center"><a href="#">财务申请</a></li>
 					</ul>
 				</div>
+<<<<<<< HEAD
 				<div title="员工管理" data-options="iconCls:'icon-user_b-png'">
+=======
+				<div title="员工管理" data-options="iconCls:'icon-status_online'">
+>>>>>>> c40ac752a18ea81186e8a7915a0ed33d04396276
 					<ul>
 						<li><img src="img/user_edit.png" align="center"><a href="#">员工入职</a></li>
 						<li><img src="img/user_edit.png" align="center"><a href="#">员工调岗</a></li>
@@ -288,6 +360,7 @@
 				</div>
 				<div title="财务管理" data-options="iconCls:'icon-chart_bar-png'">
 					<ul>
+<<<<<<< HEAD
 						<li><img src="img/money_yen.png" align="center"><a href="#">年度收支报告</a></li>
 						<li><img src="img/money_yen.png" align="center"><a href="#">公司花费添加</a></li>
 						<li><img src="img/money_yen.png" align="center"><a href="#">工资发放</a></li>
@@ -295,18 +368,35 @@
 					</ul>
 				</div>
 				<div title="考勤管理" data-options = "iconCls:'icon-edit'">
+=======
+						<li><a href="#">年度收支报告</a></li>
+						<li><a href="#">公司花费添加</a></li>
+						<li><a href="#">工资发放</a></li>
+						<li><a href="#">公司收入条目添加</a></li>
+					</ul>
+				</div>
+				<div title="考勤管理" data-options = "iconCls:'icon-chart_bar'">
+>>>>>>> c40ac752a18ea81186e8a7915a0ed33d04396276
 					<ul>
 						<li><a href="#">查看记录</a></li>
 						
 					</ul>
 				</div>
+<<<<<<< HEAD
 				<div title="发送申请" data-options="iconCls:'icon-status_online-png'">
+=======
+				<div title="发送申请" data-options = "iconCls:'icon-arrow_refresh'">
+>>>>>>> c40ac752a18ea81186e8a7915a0ed33d04396276
 					<ul>
 						<li><img src="img/page_go.png" align="center"><a href="#">查看申请</a></li>
 						<li><img src="img/page_go.png" align="center"><a href="#">公司报销</a></li>
 					</ul>
 				</div>
+<<<<<<< HEAD
 				<div title="通讯录"  data-options="iconCls:'icon-user_group-png'">
+=======
+				<div title="通讯录" data-options ="iconCls:'icon-user_group'">
+>>>>>>> c40ac752a18ea81186e8a7915a0ed33d04396276
 					<ul>
 						<li><img src="img/user_group.png" align="center"><a href="#">公司通讯录</a></li>
 					</ul>

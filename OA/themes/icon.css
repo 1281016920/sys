@@ -129,9 +129,21 @@
 .icon-money_yen-png{
 	background:url('icons/money_yen.png') no-repeat center center;
 }
+<<<<<<< HEAD
 .icon-css_go-png{
 	background:url('icons/css_go.png') no-repeat center center;
 }
 .icon-page_go-png{
 	background:url('icons/page_go.png') no-repeat center center;
 }
+=======
+.icon-status_online {
+	background:url('icons/status_online.png') no-repeat center center;
+}
+.icon-arrow_refresh {
+	background:url('icons/arrow_refresh.png') no-repeat center center;
+}
+.icon-chart_bar {
+	background:url('icons/chart_bar.png') no-repeat center center;
+}
+>>>>>>> c40ac752a18ea81186e8a7915a0ed33d04396276
